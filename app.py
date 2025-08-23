@@ -3,9 +3,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import numpy as np
 import matplotlib.pyplot as plt
-
-# Load trained model
-model = load_model("cataract_model.h5")
+import os
 
 # Page config
 st.set_page_config(
@@ -21,7 +19,16 @@ This app predicts whether an eye image has **Cataract** or is **Normal**.
 Upload a clear image of the eye, and the AI model will provide the prediction instantly.
 """)
 
-# Instructions in a sidebar
+# Load trained model safely
+MODEL_PATH = "cataract_model.h5"
+model = None
+if os.path.exists(MODEL_PATH):
+    model = load_model(MODEL_PATH)
+else:
+    st.error("⚠️ Model file not found! Please upload `cataract_model.h5` to the project folder.")
+    st.stop()  # stop execution if model is missing
+
+# Sidebar Instructions
 st.sidebar.header("Instructions")
 st.sidebar.markdown("""
 1. Click 'Browse files' and select an eye image (jpg/jpeg/png).  
@@ -82,4 +89,5 @@ if st.checkbox("Show Training Accuracy Graph"):
 
 st.markdown("---")
 st.markdown("Developed by: **Your Name**  \nProject: Cataract Detection using CNN & Streamlit")
+
 
