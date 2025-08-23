@@ -88,6 +88,6 @@ if st.checkbox("Show Training Accuracy Graph"):
     st.pyplot(fig)
 
 st.markdown("---")
-st.markdown("Developed by: **Your Name**  \nProject: Cataract Detection using CNN & Streamlit")
+st.markdown("Developed by: **Nandini**  \nProject: Cataract Detection using CNN & Streamlit")
 
 
